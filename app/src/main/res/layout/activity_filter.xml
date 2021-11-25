@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/ID"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Raumnummer:" />
+
+    <EditText
+        android:id="@+id/ID_E"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/Groeße"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Minimale Raumgröße in m^2:" />
+
+    <SeekBar
+        android:id="@+id/Groeße_S"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="30"
+        android:theme="@style/Widget.AppCompat.SeekBar.Discrete" />
+
+    <TextView
+        android:id="@+id/AnzahlStühle"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Minimale Stuhlanzahl:" />
+
+    <SeekBar
+        android:id="@+id/AnzahlStühle_S"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="30"
+        android:theme="@style/Widget.AppCompat.SeekBar.Discrete" />
+
+    <TextView
+        android:id="@+id/AnzahlTische"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Minimale Tischanzahl:" />
+
+    <SeekBar
+        android:id="@+id/AnzahlTische_S"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="30"
+        android:theme="@style/Widget.AppCompat.SeekBar.Discrete" />
+
+    <TextView
+        android:id="@+id/AnzahlPlaetze"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Minimale Platzanzahl:" />
+
+    <SeekBar
+        android:id="@+id/AnzahlPlaetze_S"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="30"
+        android:theme="@style/Widget.AppCompat.SeekBar.Discrete" />
+
+    <TextView
+        android:id="@+id/Sonderaussattung"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Sonderausstattung:" />
+
+    <EditText
+        android:id="@+id/Sonderaussattung_E"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/Maengel"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Mängel:" />
+
+    <CheckBox
+        android:id="@+id/Maengel_C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+</LinearLayout>
