@@ -10,10 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SWE_App">
         <activity
+            android:name=".FilteredActivity"
+            android:exported="true" />
+        <activity
+            android:name=".EditActivity"
+            android:exported="true" />
+        <activity
             android:name=".FilterActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity2"
+            android:name=".NewActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
