@@ -51,8 +51,6 @@ public class MainActivity<adapter> extends AppCompatActivity {
 
         //verknüpfung von ListView und raumListe
         ArrayAdapter<Raum> adapter = new ArrayAdapter<Raum>(this, android.R.layout.simple_list_item_1, raumListe);
-
-
         ListView listView = (ListView) findViewById(R.id.Ergebnisse);
         listView.setAdapter(adapter);
 

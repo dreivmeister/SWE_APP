@@ -25,7 +25,7 @@ public class Raum {
     public ArrayList<String> sonderAusstattung;
 
     @ColumnInfo(name = "Maengel")
-    public boolean maengel;
+    public int maengel;
 
     @Override
     public String toString() {
