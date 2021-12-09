@@ -1,6 +1,5 @@
 # SWE_APP
 
-SWE-Projekt-Git.
+SWE-Projekt-Git, Backup-Branch.
 
-
-auf dem main-branch passiert alles mögliche. Nach möglichkeit pro person und Aufgabe immer einen eigenen Branch nutzen. Der Backup-Branch hält immer die letzte funktionale Version vom Main-Branch, um ein Rollback zu erleichtern. 
+Hier leigt eimmer eine funktionale Kopie vom Main-branch. Nur aktualisieren,w enn alles läuft und getestet ist!
