@@ -31,5 +31,4 @@ public class Raum {
     public String toString() {
         return String.valueOf(raumnummer);
     }
-
 }
