@@ -30,7 +30,7 @@ public interface RaumDao {
             " AND ((AnzahlTische = :anzahlTische) OR (AnzahlTische IS NULL)) " +
             " AND ((AnzahlPlaetze = :anzahlPlaetze) OR (AnzahlPlaetze IS NULL))" +
             " AND ((Sonderausstattung IN (:sonder)) OR (Sonderausstattung IS NULL))" +
-            " AND (Maengel = maengel)")
+            " AND (Maengel = :maengel)")
     List<Raum> filter(int raumNummer, int raumGroesse, int anzahlStühle, int anzahlTische, int anzahlPlaetze, List<String> sonder, int maengel);
 
 
