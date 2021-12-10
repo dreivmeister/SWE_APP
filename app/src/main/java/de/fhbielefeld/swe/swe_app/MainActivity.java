@@ -44,11 +44,10 @@ public class MainActivity<adapter> extends AppCompatActivity {
 
         //Datenbank intialisieren
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "raumDatenbank").build();
+                AppDatabase.class, "raumDatenbank").allowMainThreadQueries().build();
 
         RaumDao raumDao = db.raumDao();
         //kann jetzt mit den Funktionen in RaumDao verwendet werden
-
         //erstellen der raumListe für die Darstellung in MainActivity
         raumListe = raumDao.getAll();
 

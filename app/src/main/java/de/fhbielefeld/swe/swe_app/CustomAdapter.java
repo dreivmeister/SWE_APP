@@ -10,9 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+
+
 //SOURCE: https://stackoverflow.com/questions/14663725/list-view-filter-android
 
 public class CustomAdapter extends BaseAdapter implements Filterable {
+
 
     @Override
     public int getCount() {
@@ -40,15 +43,20 @@ public class CustomAdapter extends BaseAdapter implements Filterable {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();
-                ArrayList<Integer> FilteredRaumNummern = new ArrayList<>();
+                ArrayList<RaumID> FilteredRaumNummern = new ArrayList<>();
 
                 //tatsächliches filtern
                 constraint = constraint.toString().toLowerCase();
                 for(int i = 0; i < MainActivity.getRaumListe().size(); i++) {
+                    String GebaeudeTeil = MainActivity.getRaumListe().get(i).gebaeudeteil;
                     int RaumNummer = MainActivity.getRaumListe().get(i).raumnummer;
 
-                    if (RaumNummer == Integer.parseInt(constraint.toString())) {
-                        FilteredRaumNummern.add(RaumNummer);
+                    //comparison between EditText and ListView content
+                    //compare RaumNummer with integer sequence of constraint
+                    //compare GebaeudeTeil with char at beginning of constraint
+                    //https://docs.oracle.com/javase/8/docs/api/java/lang/CharSequence.html
+                    if (GebaeudeTeil.charAt(0) == constraint.charAt(0) && constraint.toString().contains(String.valueOf(RaumNummer))) {
+                        FilteredRaumNummern.add(new RaumID(GebaeudeTeil, RaumNummer));
                     }
                 }
                 return results;
@@ -56,7 +64,7 @@ public class CustomAdapter extends BaseAdapter implements Filterable {
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                List<Integer> arrayListNames = (List<Integer>) results.values;
+                List<RaumID> arrayListNames = (List<RaumID>) results.values;
                 notifyDataSetChanged();
             }
         };
