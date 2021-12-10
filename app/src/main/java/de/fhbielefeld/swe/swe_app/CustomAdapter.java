@@ -56,7 +56,7 @@ public class CustomAdapter extends BaseAdapter implements Filterable {
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                arrayListNames = (List<Integer>) results.values;
+                List<Integer> arrayListNames = (List<Integer>) results.values;
                 notifyDataSetChanged();
             }
         };

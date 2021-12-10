@@ -1,13 +1,14 @@
 package de.fhbielefeld.swe.swe_app;
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(primaryKeys = {"gebaeudeteil", "raumnummer"})
 public class Raum {
-    @PrimaryKey
+    @NonNull public String gebaeudeteil;
     public int raumnummer;
 
     @ColumnInfo(name = "Raumgroeße")
