@@ -29,8 +29,20 @@ public class Raum {
     @ColumnInfo(name = "Maengel")
     public int maengel;
 
+    public Raum (String gebaeudeteil, int raumnummer, int raumGroesse, int anzahlStuehle, int anzahlTische, int anzahlPlaetze, String sonderAusstattung, int maengel) {
+        this.gebaeudeteil = gebaeudeteil;
+        this.raumnummer = raumnummer;
+        this.raumGroesse = raumGroesse;
+        this.anzahlStuehle = anzahlStuehle;
+        this.anzahlTische = anzahlTische;
+        this.anzahlPlaetze = anzahlPlaetze;
+        this.sonderAusstattung = sonderAusstattung;
+        this.maengel = maengel;
+    }
+
+
     @Override
     public String toString() {
-        return String.valueOf(raumnummer);
+        return gebaeudeteil + String.valueOf(raumnummer);
     }
 }
