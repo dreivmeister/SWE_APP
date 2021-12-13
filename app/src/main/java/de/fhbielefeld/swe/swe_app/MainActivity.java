@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,9 @@ import java.util.List;
 
 public class MainActivity<adapter> extends AppCompatActivity {
     static List<Raum> raumListe;
+
+
+
     @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +51,21 @@ public class MainActivity<adapter> extends AppCompatActivity {
         //Datenbank intialisieren
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "raumDatenbank").allowMainThreadQueries().build();
-
-
         RaumDao raumDao = db.raumDao();
 
+
+
         //testing
-//        db.clearAllTables();
-//        //kann jetzt mit den Funktionen in RaumDao verwendet werden
-//        //erstellen der raumListe für die Darstellung in MainActivity
-//        Raum testRaum = new Raum("F", 222, 10,30,10,39,"Beamer,Auto",1);
-//        Raum testRaum1 = new Raum("D", 432, 10,30,10,39,"Beamer,Auto",1);
-//
-//        raumDao.insertRoom(testRaum);
-//        raumDao.insertRoom(testRaum1);
+        db.clearAllTables();
+        //kann jetzt mit den Funktionen in RaumDao verwendet werden
+        //erstellen der raumListe für die Darstellung in MainActivity
+        Raum testRaum = new Raum("F", 222, 10,30,10,39,"Beamer,Auto",1);
+        Raum testRaum1 = new Raum("F", 223, 10,30,10,39,"Beamer,Auto",1);
+        Raum testRaum2 = new Raum("D", 224, 10,30,10,39,"Beamer,Auto",1);
+
+        raumDao.insertRoom(testRaum);
+        raumDao.insertRoom(testRaum1);
+        raumDao.insertRoom(testRaum2);
 
         raumListe = raumDao.getAll();
 
@@ -67,6 +73,19 @@ public class MainActivity<adapter> extends AppCompatActivity {
         ArrayAdapter<Raum> adapter = new ArrayAdapter<Raum>(this, android.R.layout.simple_list_item_1, raumListe);
         ListView listView = (ListView) findViewById(R.id.Ergebnisse);
         listView.setAdapter(adapter);
+
+        //change to EditActivity when item is clicked (with item values inserted)
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println("Item clicked");
+                Intent itemZuEdit = new Intent(MainActivity.this, EditActivity.class);
+                Raum item = (Raum) parent.getAdapter().getItem(position);
+                itemZuEdit.putExtra("ID", item.toString());
+                startActivity(itemZuEdit);
+            }
+        });
+
 
         EditText inputSearch = (EditText) findViewById(R.id.Suche);
         //i dont know if it belongs here

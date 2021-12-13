@@ -125,7 +125,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/Speichern"
+            android:id="@+id/Speichern_E"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -138,7 +138,7 @@
             />
 
         <Button
-            android:id="@+id/Löschen"
+            android:id="@+id/Löschen_E"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -151,7 +151,7 @@
             />
 
         <Button
-            android:id="@+id/Verlassen_N"
+            android:id="@+id/Verlassen_E"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
