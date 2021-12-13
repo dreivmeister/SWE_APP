@@ -3,6 +3,7 @@ package de.fhbielefeld.swe.swe_app;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class MainActivity<adapter> extends AppCompatActivity {
     static List<Raum> raumListe;
+    @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +48,19 @@ public class MainActivity<adapter> extends AppCompatActivity {
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "raumDatenbank").allowMainThreadQueries().build();
 
+
         RaumDao raumDao = db.raumDao();
-        //kann jetzt mit den Funktionen in RaumDao verwendet werden
-        //erstellen der raumListe für die Darstellung in MainActivity
+
+        //testing
+//        db.clearAllTables();
+//        //kann jetzt mit den Funktionen in RaumDao verwendet werden
+//        //erstellen der raumListe für die Darstellung in MainActivity
+//        Raum testRaum = new Raum("F", 222, 10,30,10,39,"Beamer,Auto",1);
+//        Raum testRaum1 = new Raum("D", 432, 10,30,10,39,"Beamer,Auto",1);
+//
+//        raumDao.insertRoom(testRaum);
+//        raumDao.insertRoom(testRaum1);
+
         raumListe = raumDao.getAll();
 
         //verknüpfung von ListView und raumListe
@@ -70,7 +82,8 @@ public class MainActivity<adapter> extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {}
         });
-        
+
+
 
 
 
