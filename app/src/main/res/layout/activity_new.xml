@@ -255,7 +255,6 @@
             android:id="@+id/Löschen"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="Löschen"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -268,10 +267,12 @@
             android:id="@+id/Verlassen_N"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="Verlassen"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/Löschen"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
