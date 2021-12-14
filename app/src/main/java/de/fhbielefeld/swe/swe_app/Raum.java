@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity(primaryKeys = {"gebaeudeteil", "raumnummer"})
 public class Raum {
-    @NonNull public String gebaeudeteil;
+    public char gebaeudeteil;
     public int raumnummer;
 
     @ColumnInfo(name = "Raumgroeße")
@@ -29,7 +29,11 @@ public class Raum {
     @ColumnInfo(name = "Maengel")
     public int maengel;
 
-    public Raum (String gebaeudeteil, int raumnummer, int raumGroesse, int anzahlStuehle, int anzahlTische, int anzahlPlaetze, String sonderAusstattung, int maengel) {
+    public Raum() {
+
+    }
+
+    public Raum (char gebaeudeteil, int raumnummer, int raumGroesse, int anzahlStuehle, int anzahlTische, int anzahlPlaetze, String sonderAusstattung, int maengel) {
         this.gebaeudeteil = gebaeudeteil;
         this.raumnummer = raumnummer;
         this.raumGroesse = raumGroesse;
@@ -46,8 +50,7 @@ public class Raum {
         return gebaeudeteil + String.valueOf(raumnummer);
     }
 
-    @NonNull
-    public String getGebaeudeteil() {
+    public char getGebaeudeteil() {
         return gebaeudeteil;
     }
 
@@ -77,5 +80,37 @@ public class Raum {
 
     public String getSonderAusstattung() {
         return sonderAusstattung;
+    }
+
+    public void setGebaeudeteil(char gebaeudeteil) {
+        this.gebaeudeteil = gebaeudeteil;
+    }
+
+    public void setRaumnummer(int raumnummer) {
+        this.raumnummer = raumnummer;
+    }
+
+    public void setRaumGroesse(int raumGroesse) {
+        this.raumGroesse = raumGroesse;
+    }
+
+    public void setAnzahlStuehle(int anzahlStuehle) {
+        this.anzahlStuehle = anzahlStuehle;
+    }
+
+    public void setAnzahlTische(int anzahlTische) {
+        this.anzahlTische = anzahlTische;
+    }
+
+    public void setAnzahlPlaetze(int anzahlPlaetze) {
+        this.anzahlPlaetze = anzahlPlaetze;
+    }
+
+    public void setSonderAusstattung(String sonderAusstattung) {
+        this.sonderAusstattung = sonderAusstattung;
+    }
+
+    public void setMaengel(int maengel) {
+        this.maengel = maengel;
     }
 }

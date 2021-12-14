@@ -21,16 +21,13 @@ public class EditActivity extends AppCompatActivity {
         RaumDao raumDao = app.getRaumDao();
 
         Intent intent = getIntent();
-        String gebT = intent.getStringExtra("Gebaeudeteil");
+        char gebT = intent.getCharExtra("Gebaeudeteil", 'z');
         int raumN = intent.getIntExtra("Raumnummer", 0);
 
         Raum currentRoom = raumDao.loadById(raumN, gebT);
 
         EditText text1 = (EditText) findViewById(R.id.ID_E);
         text1.setText(currentRoom.toString());
-
-
-
 
         EditText text2 = (EditText) findViewById(R.id.Groeße_E);
         text2.setText(String.valueOf(currentRoom.getRaumGroesse()));
@@ -48,7 +45,7 @@ public class EditActivity extends AppCompatActivity {
         text6.setText(currentRoom.getSonderAusstattung());
 
         EditText text7 = (EditText) findViewById(R.id.Maengel_E);
-        text6.setText(String.valueOf(currentRoom.getMaengel()));
+        text7.setText(String.valueOf(currentRoom.getMaengel()));
 
 
 
@@ -70,6 +67,23 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("Speichern Button clicked");
+                //Toast als Prozessinformation
+
+                //Raum Objekt erstellen aus gegebenen Werten
+                Raum editedRoom = new Raum();
+                editedRoom.setGebaeudeteil(text1.getText().charAt(0));
+                editedRoom.setRaumnummer(Integer.parseInt(String.valueOf(text1.getText().subSequence(1,4))));
+                editedRoom.setRaumGroesse(Integer.parseInt(String.valueOf(text2.getText())));
+                editedRoom.setAnzahlStuehle(Integer.parseInt(String.valueOf(text3.getText())));
+                editedRoom.setAnzahlTische(Integer.parseInt(String.valueOf(text4.getText())));
+                editedRoom.setAnzahlPlaetze(Integer.parseInt(String.valueOf(text5.getText())));
+                editedRoom.setSonderAusstattung(String.valueOf(text6.getText()));
+                editedRoom.setMaengel(Integer.parseInt(String.valueOf(text7.getText())));
+
+                //Raum Objekt in Datenbank abspeichern
+                raumDao.updateRoom(editedRoom);
+
+
                 Intent editZuMain = new Intent(EditActivity.this, MainActivity.class);
                 startActivity(editZuMain);
             }
@@ -82,6 +96,15 @@ public class EditActivity extends AppCompatActivity {
                 System.out.println("verlassen Button clicked");
                 Intent editZuMain = new Intent(EditActivity.this, MainActivity.class);
                 startActivity(editZuMain);
+            }
+        });
+
+        Button Loeschen = findViewById(R.id.Löschen_E);
+        Loeschen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Alle Werte auf "Null" setzen
+
             }
         });
 

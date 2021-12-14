@@ -48,14 +48,14 @@ public class CustomAdapter extends BaseAdapter implements Filterable {
                 //tatsächliches filtern
                 constraint = constraint.toString().toLowerCase();
                 for(int i = 0; i < MainActivity.getRaumListe().size(); i++) {
-                    String GebaeudeTeil = MainActivity.getRaumListe().get(i).gebaeudeteil;
+                    char GebaeudeTeil = MainActivity.getRaumListe().get(i).gebaeudeteil;
                     int RaumNummer = MainActivity.getRaumListe().get(i).raumnummer;
 
                     //comparison between EditText and ListView content
                     //compare RaumNummer with integer sequence of constraint
                     //compare GebaeudeTeil with char at beginning of constraint
                     //https://docs.oracle.com/javase/8/docs/api/java/lang/CharSequence.html
-                    if (GebaeudeTeil.charAt(0) == constraint.charAt(0) && constraint.toString().contains(String.valueOf(RaumNummer))) {
+                    if (GebaeudeTeil == constraint.charAt(0) && constraint.toString().contains(String.valueOf(RaumNummer))) {
                         FilteredRaumNummern.add(new RaumID(GebaeudeTeil, RaumNummer));
                     }
                 }

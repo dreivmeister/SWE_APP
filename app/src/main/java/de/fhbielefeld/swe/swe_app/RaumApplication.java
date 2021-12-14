@@ -12,7 +12,7 @@ public class RaumApplication extends Application {
     public void onCreate() {
         super.onCreate();
         db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "raumDatenbank").allowMainThreadQueries().build();
+                AppDatabase.class, "raumDatenbank").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         raumDao = db.raumDao();
     }
 

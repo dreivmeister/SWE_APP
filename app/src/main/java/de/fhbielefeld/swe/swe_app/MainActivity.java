@@ -54,15 +54,15 @@ public class MainActivity<adapter> extends AppCompatActivity {
         RaumDao raumDao = app.getRaumDao();
 
         db.clearAllTables();
-        //kann jetzt mit den Funktionen in RaumDao verwendet werden
-        //erstellen der raumListe für die Darstellung in MainActivity
-        Raum testRaum = new Raum("F", 222, 10,30,10,39,"Beamer,Auto",1);
-        Raum testRaum1 = new Raum("F", 223, 10,30,10,39,"Beamer,Auto",1);
-        Raum testRaum2 = new Raum("D", 224, 10,30,10,39,"Beamer,Auto",1);
-
-        raumDao.insertRoom(testRaum);
-        raumDao.insertRoom(testRaum1);
-        raumDao.insertRoom(testRaum2);
+////        //kann jetzt mit den Funktionen in RaumDao verwendet werden
+////        //erstellen der raumListe für die Darstellung in MainActivity
+            Raum testRaum = new Raum('F', 222, 10,30,10,39,"Beamer,Auto",1);
+            Raum testRaum1 = new Raum('F', 223, 10,30,10,39,"Beamer,Auto",1);
+            Raum testRaum2 = new Raum('F', 224, 10,30,10,39,"Beamer,Auto",1);
+////
+            raumDao.insertRoom(testRaum);
+            raumDao.insertRoom(testRaum1);
+            raumDao.insertRoom(testRaum2);
 
         raumListe = raumDao.getAll();
 
@@ -104,6 +104,18 @@ public class MainActivity<adapter> extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        //aufruf der überschriebenen Application-Klasse
+        RaumApplication app = (RaumApplication)getApplication();
+        AppDatabase db = app.getDatabase();
+        RaumDao raumDao = app.getRaumDao();
+        
+        super.onResume();
+
+        raumListe = raumDao.getAll();
     }
 
     static List<Raum> getRaumListe() {
