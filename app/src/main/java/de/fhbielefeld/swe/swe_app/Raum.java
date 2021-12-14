@@ -45,4 +45,37 @@ public class Raum {
     public String toString() {
         return gebaeudeteil + String.valueOf(raumnummer);
     }
+
+    @NonNull
+    public String getGebaeudeteil() {
+        return gebaeudeteil;
+    }
+
+    public int getRaumnummer() {
+        return raumnummer;
+    }
+
+    public int getRaumGroesse() {
+        return raumGroesse;
+    }
+
+    public int getAnzahlStuehle() {
+        return anzahlStuehle;
+    }
+
+    public int getAnzahlPlaetze() {
+        return anzahlPlaetze;
+    }
+
+    public int getAnzahlTische() {
+        return anzahlTische;
+    }
+
+    public int getMaengel() {
+        return maengel;
+    }
+
+    public String getSonderAusstattung() {
+        return sonderAusstattung;
+    }
 }

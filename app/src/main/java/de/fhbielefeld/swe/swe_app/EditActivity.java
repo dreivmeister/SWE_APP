@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class EditActivity extends AppCompatActivity {
 
@@ -15,16 +16,53 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
+        RaumApplication app = (RaumApplication)getApplication();
+        AppDatabase db = app.getDatabase();
+        RaumDao raumDao = app.getRaumDao();
+
         Intent intent = getIntent();
-        String ID = intent.getStringExtra("ID");
+        String gebT = intent.getStringExtra("Gebaeudeteil");
+        int raumN = intent.getIntExtra("Raumnummer", 0);
 
-        //datenbank initialisieren
-        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "raumDatenbank").allowMainThreadQueries().build();
-        RaumDao raumDao = db.raumDao();
+        Raum currentRoom = raumDao.loadById(raumN, gebT);
 
-        //übergebene daten
-        //Raum givenRaum = raumDao.loadById(ID.charAt(0), ID.substring(1));
+        EditText text1 = (EditText) findViewById(R.id.ID_E);
+        text1.setText(currentRoom.toString());
+
+
+
+
+        EditText text2 = (EditText) findViewById(R.id.Groeße_E);
+        text2.setText(String.valueOf(currentRoom.getRaumGroesse()));
+
+        EditText text3 = (EditText) findViewById(R.id.AnzahlStühle_E);
+        text3.setText(String.valueOf(currentRoom.getAnzahlStuehle()));
+
+        EditText text4 = (EditText) findViewById(R.id.AnzahlTische_E);
+        text4.setText(String.valueOf(currentRoom.getAnzahlTische()));
+
+        EditText text5 = (EditText) findViewById(R.id.AnzahlPlaetze_E);
+        text5.setText(String.valueOf(currentRoom.getAnzahlPlaetze()));
+
+        EditText text6 = (EditText) findViewById(R.id.Sonderaussattung_E);
+        text6.setText(currentRoom.getSonderAusstattung());
+
+        EditText text7 = (EditText) findViewById(R.id.Maengel_E);
+        text6.setText(String.valueOf(currentRoom.getMaengel()));
+
+
+
+
+
+
+
+        //receive intent string which is roomID
+        //split up in gebäudeteil und raumnummer
+        //get corresponding room from db
+        //put values in edit text fields as defualt value
+
+
+
 
 
         Button Speichern = findViewById(R.id.Speichern_E);

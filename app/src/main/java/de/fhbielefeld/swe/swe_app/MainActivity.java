@@ -48,14 +48,11 @@ public class MainActivity<adapter> extends AppCompatActivity {
             }
         });
 
-        //Datenbank intialisieren
-        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "raumDatenbank").allowMainThreadQueries().build();
-        RaumDao raumDao = db.raumDao();
+        //aufruf der überschriebenen Application-Klasse
+        RaumApplication app = (RaumApplication)getApplication();
+        AppDatabase db = app.getDatabase();
+        RaumDao raumDao = app.getRaumDao();
 
-
-
-        //testing
         db.clearAllTables();
         //kann jetzt mit den Funktionen in RaumDao verwendet werden
         //erstellen der raumListe für die Darstellung in MainActivity
@@ -81,7 +78,8 @@ public class MainActivity<adapter> extends AppCompatActivity {
                 System.out.println("Item clicked");
                 Intent itemZuEdit = new Intent(MainActivity.this, EditActivity.class);
                 Raum item = (Raum) parent.getAdapter().getItem(position);
-                itemZuEdit.putExtra("ID", item.toString());
+                itemZuEdit.putExtra("Raumnummer", item.getRaumnummer());
+                itemZuEdit.putExtra("Gebaeudeteil", item.getGebaeudeteil());
                 startActivity(itemZuEdit);
             }
         });
