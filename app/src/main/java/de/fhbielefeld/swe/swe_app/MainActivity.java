@@ -16,10 +16,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity<adapter> extends AppCompatActivity {
     static List<Raum> raumListe;
-
 
 
     @SuppressLint("WrongThread")
@@ -48,28 +48,25 @@ public class MainActivity<adapter> extends AppCompatActivity {
             }
         });
 
-        //aufruf der überschriebenen Application-Klasse
-        RaumApplication app = (RaumApplication)getApplication();
-        AppDatabase db = app.getDatabase();
-        RaumDao raumDao = app.getRaumDao();
 
-        db.clearAllTables();
-////        //kann jetzt mit den Funktionen in RaumDao verwendet werden
-////        //erstellen der raumListe für die Darstellung in MainActivity
-            Raum testRaum = new Raum('F', 222, 10,30,10,39,"Beamer,Auto",1);
-            Raum testRaum1 = new Raum('F', 223, 10,30,10,39,"Beamer,Auto",1);
-            Raum testRaum2 = new Raum('F', 224, 10,30,10,39,"Beamer,Auto",1);
-////
-            raumDao.insertRoom(testRaum);
-            raumDao.insertRoom(testRaum1);
-            raumDao.insertRoom(testRaum2);
+        Raum tR = new Raum('F',123,1,2,3,4,"Beamer",1);
+        Raum tR1 = new Raum('D',321,2,3,4,5,"Autohaus",0);
+        Raum tR2 = new Raum('K',321,2,3,4,5,"Autohaus",0);
 
-        raumListe = raumDao.getAll();
+        AppDatabase.getAppDatabase(this).clearAllTables();
+
+        utils.addRoom(AppDatabase.getAppDatabase(this), tR);
+        utils.addRoom(AppDatabase.getAppDatabase(this), tR1);
+        utils.addRoom(AppDatabase.getAppDatabase(this), tR2);
+        raumListe = utils.getAllRooms(AppDatabase.getAppDatabase(this));
 
         //verknüpfung von ListView und raumListe
         ArrayAdapter<Raum> adapter = new ArrayAdapter<Raum>(this, android.R.layout.simple_list_item_1, raumListe);
         ListView listView = (ListView) findViewById(R.id.Ergebnisse);
         listView.setAdapter(adapter);
+
+
+
 
         //change to EditActivity when item is clicked (with item values inserted)
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -80,9 +77,20 @@ public class MainActivity<adapter> extends AppCompatActivity {
                 Raum item = (Raum) parent.getAdapter().getItem(position);
                 itemZuEdit.putExtra("Raumnummer", item.getRaumnummer());
                 itemZuEdit.putExtra("Gebaeudeteil", item.getGebaeudeteil());
+
+
+                //print db contents
+                List<Raum> rL = utils.getAllRooms(AppDatabase.getAppDatabase(MainActivity.this));
+                System.out.println("MA vor Wechsel: ");
+                for (Raum r : rL) {
+                    r.print();
+                }
+
                 startActivity(itemZuEdit);
             }
         });
+
+
 
 
         EditText inputSearch = (EditText) findViewById(R.id.Suche);
@@ -102,21 +110,50 @@ public class MainActivity<adapter> extends AppCompatActivity {
 
 
 
-
-
     }
 
     @Override
     protected void onResume() {
-        //aufruf der überschriebenen Application-Klasse
-        RaumApplication app = (RaumApplication)getApplication();
-        AppDatabase db = app.getDatabase();
-        RaumDao raumDao = app.getRaumDao();
-        
         super.onResume();
+        System.out.println("-------onResume-------");
 
-        raumListe = raumDao.getAll();
+
+
+        Intent i = getIntent();
+        Bundle b = i.getBundleExtra("editedRoom");
+        Raum updatedRoom = new Raum();
+        if (b != null) {
+            updatedRoom = new Raum(b.getChar("gebT"), b.getInt("raumN"), b.getInt("raumG"),
+                    b.getInt("anzS"), b.getInt("anzT"), b.getInt("anzP"), b.getString("sonderA"), b.getInt("maengel"));
+            utils.updateRoom(AppDatabase.getAppDatabase(this), updatedRoom);
+        }
+
+        //System.out.println(updatedRoom.getGebaeudeteil() + " " + updatedRoom.getRaumnummer());
+
+
+        //utils.updateRoom(AppDatabase.getAppDatabase(this), updatedRoom);
+
+
+        //print db contents
+        List<Raum> rL = utils.getAllRooms(AppDatabase.getAppDatabase(MainActivity.this));
+
+
+        System.out.println("MA nach Wechsel: ");
+        for (Raum r : rL) {
+            r.print();
+        }
+
+
+
+        ArrayAdapter<Raum> adapter = new ArrayAdapter<Raum>(MainActivity.this,android.R.layout.simple_list_item_1, rL);
+        ListView listView = findViewById(R.id.Ergebnisse);
+        listView.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+
+
     }
+
 
     static List<Raum> getRaumListe() {
         return raumListe;

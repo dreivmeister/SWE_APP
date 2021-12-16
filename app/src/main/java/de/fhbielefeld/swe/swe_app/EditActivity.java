@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 public class EditActivity extends AppCompatActivity {
 
     @Override
@@ -16,15 +19,11 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
-        RaumApplication app = (RaumApplication)getApplication();
-        AppDatabase db = app.getDatabase();
-        RaumDao raumDao = app.getRaumDao();
-
         Intent intent = getIntent();
         char gebT = intent.getCharExtra("Gebaeudeteil", 'z');
         int raumN = intent.getIntExtra("Raumnummer", 0);
 
-        Raum currentRoom = raumDao.loadById(raumN, gebT);
+        Raum currentRoom = utils.getRoom(AppDatabase.getAppDatabase(this), gebT, raumN);
 
         EditText text1 = (EditText) findViewById(R.id.ID_E);
         text1.setText(currentRoom.toString());
@@ -49,14 +48,19 @@ public class EditActivity extends AppCompatActivity {
 
 
 
-
-
-
-
         //receive intent string which is roomID
         //split up in gebäudeteil und raumnummer
         //get corresponding room from db
         //put values in edit text fields as defualt value
+
+        //print db contents
+        List<Raum> rL = utils.getAllRooms(AppDatabase.getAppDatabase(this));
+        System.out.println("EA vor Edit: ");
+        for (Raum r : rL) {
+            r.print();
+        }
+
+
 
 
 
@@ -70,24 +74,33 @@ public class EditActivity extends AppCompatActivity {
                 //Toast als Prozessinformation
 
                 //Raum Objekt erstellen aus gegebenen Werten
-                Raum editedRoom = new Raum();
-                editedRoom.setGebaeudeteil(text1.getText().charAt(0));
-                editedRoom.setRaumnummer(Integer.parseInt(String.valueOf(text1.getText().subSequence(1,4))));
-                editedRoom.setRaumGroesse(Integer.parseInt(String.valueOf(text2.getText())));
-                editedRoom.setAnzahlStuehle(Integer.parseInt(String.valueOf(text3.getText())));
-                editedRoom.setAnzahlTische(Integer.parseInt(String.valueOf(text4.getText())));
-                editedRoom.setAnzahlPlaetze(Integer.parseInt(String.valueOf(text5.getText())));
-                editedRoom.setSonderAusstattung(String.valueOf(text6.getText()));
-                editedRoom.setMaengel(Integer.parseInt(String.valueOf(text7.getText())));
+                Bundle b = new Bundle();
+                b.putChar("gebT", text1.getText().charAt(0));
+                b.putInt("raumN", Integer.parseInt(String.valueOf(text1.getText().subSequence(1,4))));
+                b.putInt("raumG",Integer.parseInt(String.valueOf(text2.getText())));
+                b.putInt("anzS" ,Integer.parseInt(String.valueOf(text3.getText())));
+                b.putInt("anzT",Integer.parseInt(String.valueOf(text4.getText())));
+                b.putInt("anzP", Integer.parseInt(String.valueOf(text5.getText())));
+                b.putString("sonderA", String.valueOf(text6.getText()));
+                b.putInt("maengel", Integer.parseInt(String.valueOf(text7.getText())));
 
-                //Raum Objekt in Datenbank abspeichern
-                raumDao.updateRoom(editedRoom);
+                //print db contents
+                List<Raum> rL = utils.getAllRooms(AppDatabase.getAppDatabase(EditActivity.this));
+                System.out.println("EA nach Edit: ");
+                for (Raum r : rL) {
+                    r.print();
+                }
 
 
                 Intent editZuMain = new Intent(EditActivity.this, MainActivity.class);
+                editZuMain.putExtra("editedRoom", b);
                 startActivity(editZuMain);
             }
         });
+
+
+
+
 
         Button Verlassen = findViewById(R.id.Verlassen_E);
         Verlassen.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +117,6 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Alle Werte auf "Null" setzen
-
             }
         });
 

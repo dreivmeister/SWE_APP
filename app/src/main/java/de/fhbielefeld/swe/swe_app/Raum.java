@@ -106,11 +106,13 @@ public class Raum {
         this.anzahlPlaetze = anzahlPlaetze;
     }
 
-    public void setSonderAusstattung(String sonderAusstattung) {
-        this.sonderAusstattung = sonderAusstattung;
-    }
+    public void setSonderAusstattung(String sonderAusstattung) { this.sonderAusstattung = sonderAusstattung; }
 
     public void setMaengel(int maengel) {
         this.maengel = maengel;
+    }
+
+    public void print() {
+        System.out.println(this.gebaeudeteil + " " + this.raumnummer);
     }
 }
