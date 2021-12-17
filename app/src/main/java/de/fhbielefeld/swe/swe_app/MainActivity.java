@@ -126,36 +126,24 @@ public class MainActivity<adapter> extends AppCompatActivity {
             updatedRoom = new Raum(b.getChar("gebT"), b.getInt("raumN"), b.getInt("raumG"),
                     b.getInt("anzS"), b.getInt("anzT"), b.getInt("anzP"), b.getString("sonderA"), b.getInt("maengel"));
             utils.updateRoom(AppDatabase.getAppDatabase(this), updatedRoom);
-        }
 
-        //System.out.println(updatedRoom.getGebaeudeteil() + " " + updatedRoom.getRaumnummer());
+            //print db contents
+            raumListe = utils.getAllRooms(AppDatabase.getAppDatabase(MainActivity.this));
 
+            ArrayAdapter<Raum> adapter = new ArrayAdapter<Raum>(MainActivity.this,android.R.layout.simple_list_item_1, raumListe);
+            ListView listView = findViewById(R.id.Ergebnisse);
+            listView.setAdapter(adapter);
 
-        //utils.updateRoom(AppDatabase.getAppDatabase(this), updatedRoom);
-
-
-        //print db contents
-        List<Raum> rL = utils.getAllRooms(AppDatabase.getAppDatabase(MainActivity.this));
-
-
-        System.out.println("MA nach Wechsel: ");
-        for (Raum r : rL) {
-            r.print();
+            adapter.notifyDataSetChanged();
         }
 
 
-
-        ArrayAdapter<Raum> adapter = new ArrayAdapter<Raum>(MainActivity.this,android.R.layout.simple_list_item_1, rL);
-        ListView listView = findViewById(R.id.Ergebnisse);
-        listView.setAdapter(adapter);
-
-        adapter.notifyDataSetChanged();
 
 
     }
 
 
-    static List<Raum> getRaumListe() {
+    public static List<Raum> getRaumListe() {
         return raumListe;
     }
 }

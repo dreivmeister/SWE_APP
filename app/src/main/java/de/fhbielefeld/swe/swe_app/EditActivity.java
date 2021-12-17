@@ -48,22 +48,6 @@ public class EditActivity extends AppCompatActivity {
 
 
 
-        //receive intent string which is roomID
-        //split up in gebäudeteil und raumnummer
-        //get corresponding room from db
-        //put values in edit text fields as defualt value
-
-        //print db contents
-        List<Raum> rL = utils.getAllRooms(AppDatabase.getAppDatabase(this));
-        System.out.println("EA vor Edit: ");
-        for (Raum r : rL) {
-            r.print();
-        }
-
-
-
-
-
 
 
         Button Speichern = findViewById(R.id.Speichern_E);
@@ -83,14 +67,6 @@ public class EditActivity extends AppCompatActivity {
                 b.putInt("anzP", Integer.parseInt(String.valueOf(text5.getText())));
                 b.putString("sonderA", String.valueOf(text6.getText()));
                 b.putInt("maengel", Integer.parseInt(String.valueOf(text7.getText())));
-
-                //print db contents
-                List<Raum> rL = utils.getAllRooms(AppDatabase.getAppDatabase(EditActivity.this));
-                System.out.println("EA nach Edit: ");
-                for (Raum r : rL) {
-                    r.print();
-                }
-
 
                 Intent editZuMain = new Intent(EditActivity.this, MainActivity.class);
                 editZuMain.putExtra("editedRoom", b);
@@ -117,6 +93,13 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Alle Werte auf "Null" setzen
+                text1.setText("");
+                text2.setText("");
+                text3.setText("");
+                text4.setText("");
+                text5.setText("");
+                text6.setText("");
+                text7.setText("");
             }
         });
 
