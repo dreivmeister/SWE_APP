@@ -2,6 +2,7 @@ package de.fhbielefeld.swe.swe_app;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -16,11 +17,11 @@ public interface RaumDao {
 
     //liste mit Räumen mit gesuchter Raumnummer
     @Query("SELECT * FROM raum WHERE raumnummer IN (:raumNummern) AND gebaeudeteil IN (:gebaeudeTeil)")
-    List<Raum> loadAllByIds(int[] raumNummern, String[] gebaeudeTeil);
+    List<Raum> loadAllByIds(int[] raumNummern, char[] gebaeudeTeil);
 
     //raum mit gesuchter Raumnummer
     @Query("SELECT * FROM raum WHERE (raumnummer = :raumNummer) AND (gebaeudeteil = :gebaudeTeil)")
-    Raum loadById(int raumNummer, String gebaudeTeil);
+    Raum loadById(int raumNummer, char gebaudeTeil);
 
     //querys für filter
     //ignore zero parameters (not every parameter has to be specified)
@@ -32,11 +33,11 @@ public interface RaumDao {
             " AND ((AnzahlPlaetze = :anzahlPlaetze) OR (AnzahlPlaetze IS NULL))" +
             " AND ((Sonderausstattung IN (:sonder)) OR (Sonderausstattung IS NULL))" +
             " AND (Maengel = :maengel)")
-    List<Raum> filter(int raumNummer, String gebaudeTeil, int raumGroesse, int anzahlStühle, int anzahlTische, int anzahlPlaetze, List<String> sonder, int maengel);
+    List<Raum> filter(int raumNummer, char gebaudeTeil, int raumGroesse, int anzahlStühle, int anzahlTische, int anzahlPlaetze, List<String> sonder, int maengel);
 
 
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertRoom(Raum raum);
 
     @Delete

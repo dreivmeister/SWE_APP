@@ -1,14 +1,14 @@
 package de.fhbielefeld.swe.swe_app;
 
 public class RaumID {
-    private String Teil;
+    private char Teil;
     private int Nummer;
-    public RaumID(String Teil, int Nummer) {
+    public RaumID(char Teil, int Nummer) {
         this.Teil = Teil;
         this.Nummer = Nummer;
     }
 
-    public String getTeil() {
+    public char getTeil() {
         return this.Teil;
     }
     public int getNummer() {

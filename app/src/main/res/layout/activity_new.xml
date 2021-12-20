@@ -261,8 +261,7 @@
             app:layout_constraintEnd_toStartOf="@+id/Verlassen_N"
             app:layout_constraintStart_toEndOf="@+id/Speichern"
             app:layout_constraintTop_toTopOf="parent" />
-
-
+      
         <Button
             android:id="@+id/Verlassen_N"
             android:layout_width="0dp"
