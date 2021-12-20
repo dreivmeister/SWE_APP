@@ -46,10 +46,6 @@ public class EditActivity extends AppCompatActivity {
         EditText text7 = (EditText) findViewById(R.id.Maengel_E);
         text7.setText(String.valueOf(currentRoom.getMaengel()));
 
-
-
-
-
         Button Speichern = findViewById(R.id.Speichern_E);
         Speichern.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,17 +62,13 @@ public class EditActivity extends AppCompatActivity {
                 b.putInt("anzT",Integer.parseInt(String.valueOf(text4.getText())));
                 b.putInt("anzP", Integer.parseInt(String.valueOf(text5.getText())));
                 b.putString("sonderA", String.valueOf(text6.getText()));
-                b.putInt("maengel", Integer.parseInt(String.valueOf(text7.getText())));
+                b.putString("maengel", String.valueOf(text7.getText()));
 
                 Intent editZuMain = new Intent(EditActivity.this, MainActivity.class);
                 editZuMain.putExtra("editedRoom", b);
                 startActivity(editZuMain);
             }
         });
-
-
-
-
 
         Button Verlassen = findViewById(R.id.Verlassen_E);
         Verlassen.setOnClickListener(new View.OnClickListener() {
@@ -87,22 +79,6 @@ public class EditActivity extends AppCompatActivity {
                 startActivity(editZuMain);
             }
         });
-
-        Button Loeschen = findViewById(R.id.Löschen_E);
-        Loeschen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Alle Werte auf "Null" setzen
-                text1.setText("");
-                text2.setText("");
-                text3.setText("");
-                text4.setText("");
-                text5.setText("");
-                text6.setText("");
-                text7.setText("");
-            }
-        });
-
 
     }
 }

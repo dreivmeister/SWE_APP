@@ -27,13 +27,13 @@ public class Raum {
     public String sonderAusstattung;
 
     @ColumnInfo(name = "Maengel")
-    public int maengel;
+    public String maengel;
 
     public Raum() {
 
     }
 
-    public Raum (char gebaeudeteil, int raumnummer, int raumGroesse, int anzahlStuehle, int anzahlTische, int anzahlPlaetze, String sonderAusstattung, int maengel) {
+    public Raum (char gebaeudeteil, int raumnummer, int raumGroesse, int anzahlStuehle, int anzahlTische, int anzahlPlaetze, String sonderAusstattung, String maengel) {
         this.gebaeudeteil = gebaeudeteil;
         this.raumnummer = raumnummer;
         this.raumGroesse = raumGroesse;
@@ -74,7 +74,7 @@ public class Raum {
         return anzahlTische;
     }
 
-    public int getMaengel() {
+    public String getMaengel() {
         return maengel;
     }
 
@@ -108,7 +108,7 @@ public class Raum {
 
     public void setSonderAusstattung(String sonderAusstattung) { this.sonderAusstattung = sonderAusstattung; }
 
-    public void setMaengel(int maengel) {
+    public void setMaengel(String maengel) {
         this.maengel = maengel;
     }
 

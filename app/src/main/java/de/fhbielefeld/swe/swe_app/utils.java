@@ -22,5 +22,9 @@ public class utils {
         db.raumDao().updateRoom(raum);
     }
 
+    public static void deleteRoom(final AppDatabase db, Raum raum) {
+        db.raumDao().deleteRoom(raum);
+    }
+
 
 }

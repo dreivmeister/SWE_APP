@@ -15,11 +15,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity<adapter> extends AppCompatActivity {
-    static List<Raum> raumListe;
+    static List<Raum> raumListe = new ArrayList<>();
 
 
     @SuppressLint("WrongThread")
@@ -28,44 +29,11 @@ public class MainActivity<adapter> extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button neuerRaum = findViewById(R.id.Neu);
-        neuerRaum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("Neu Button clicked");
-                Intent mainZuNeu = new Intent(MainActivity.this, NewActivity.class);
-                startActivity(mainZuNeu);
-            }
-        });
-
-        Button filter = findViewById(R.id.Filter);
-        filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("Filter Button clicked");
-                Intent mainZuFilter = new Intent(MainActivity.this, FilterActivity.class);
-                startActivity(mainZuFilter);
-            }
-        });
-
-
-        Raum tR = new Raum('F',123,1,2,3,4,"Beamer",1);
-        Raum tR1 = new Raum('D',321,2,3,4,5,"Autohaus",0);
-        Raum tR2 = new Raum('K',321,2,3,4,5,"Autohaus",0);
-
-        AppDatabase.getAppDatabase(this).clearAllTables();
-
-        utils.addRoom(AppDatabase.getAppDatabase(this), tR);
-        utils.addRoom(AppDatabase.getAppDatabase(this), tR1);
-        utils.addRoom(AppDatabase.getAppDatabase(this), tR2);
-        raumListe = utils.getAllRooms(AppDatabase.getAppDatabase(this));
-
         //verknüpfung von ListView und raumListe
+        raumListe = utils.getAllRooms(AppDatabase.getAppDatabase(MainActivity.this));
         ArrayAdapter<Raum> adapter = new ArrayAdapter<Raum>(this, android.R.layout.simple_list_item_1, raumListe);
         ListView listView = (ListView) findViewById(R.id.Ergebnisse);
         listView.setAdapter(adapter);
-
-
 
 
         //change to EditActivity when item is clicked (with item values inserted)
@@ -90,8 +58,21 @@ public class MainActivity<adapter> extends AppCompatActivity {
             }
         });
 
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Raum item = (Raum) parent.getAdapter().getItem(position);
+                utils.deleteRoom(AppDatabase.getAppDatabase(MainActivity.this), item);
 
+                raumListe = utils.getAllRooms(AppDatabase.getAppDatabase(MainActivity.this));
 
+                ArrayAdapter<Raum> adapter = new ArrayAdapter<Raum>(MainActivity.this,android.R.layout.simple_list_item_1, raumListe);
+                ListView listView = findViewById(R.id.Ergebnisse);
+                listView.setAdapter(adapter);
+
+                return true;
+            }
+        });
 
         EditText inputSearch = (EditText) findViewById(R.id.Suche);
         //i dont know if it belongs here
@@ -108,26 +89,39 @@ public class MainActivity<adapter> extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         });
 
+        Button neuerRaum = findViewById(R.id.Neu);
+        neuerRaum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Neu Button clicked");
+                Intent mainZuNeu = new Intent(MainActivity.this, NewActivity.class);
+                startActivity(mainZuNeu);
+            }
+        });
 
-
+        Button filter = findViewById(R.id.Filter);
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Filter Button clicked");
+                Intent mainZuFilter = new Intent(MainActivity.this, FilterActivity.class);
+                startActivity(mainZuFilter);
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        System.out.println("-------onResume-------");
-
-
 
         Intent i = getIntent();
         Bundle b = i.getBundleExtra("editedRoom");
         Raum updatedRoom = new Raum();
         if (b != null) {
             updatedRoom = new Raum(b.getChar("gebT"), b.getInt("raumN"), b.getInt("raumG"),
-                    b.getInt("anzS"), b.getInt("anzT"), b.getInt("anzP"), b.getString("sonderA"), b.getInt("maengel"));
+                    b.getInt("anzS"), b.getInt("anzT"), b.getInt("anzP"), b.getString("sonderA"), b.getString("maengel"));
             utils.updateRoom(AppDatabase.getAppDatabase(this), updatedRoom);
 
-            //print db contents
             raumListe = utils.getAllRooms(AppDatabase.getAppDatabase(MainActivity.this));
 
             ArrayAdapter<Raum> adapter = new ArrayAdapter<Raum>(MainActivity.this,android.R.layout.simple_list_item_1, raumListe);
@@ -135,10 +129,26 @@ public class MainActivity<adapter> extends AppCompatActivity {
             listView.setAdapter(adapter);
 
             adapter.notifyDataSetChanged();
+            return;
         }
 
+        Intent i_new = getIntent();
+        Bundle b_new = i_new.getBundleExtra("newRoom");
+        Raum newRoom = new Raum();
+        if(b_new != null) {
+            newRoom = new Raum(b_new.getChar("gebT"), b_new.getInt("raumN"), b_new.getInt("raumG"),
+                    b_new.getInt("anzS"), b_new.getInt("anzT"), b_new.getInt("anzP"), b_new.getString("sonderA"), b_new.getString("maengel"));
+            utils.addRoom(AppDatabase.getAppDatabase(this), newRoom);
 
+            raumListe = utils.getAllRooms(AppDatabase.getAppDatabase(MainActivity.this));
 
+            ArrayAdapter<Raum> adapter = new ArrayAdapter<Raum>(MainActivity.this,android.R.layout.simple_list_item_1, raumListe);
+            ListView listView = findViewById(R.id.Ergebnisse);
+            listView.setAdapter(adapter);
+
+            adapter.notifyDataSetChanged();
+            return;
+        }
 
     }
 

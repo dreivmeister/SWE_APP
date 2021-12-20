@@ -20,7 +20,7 @@
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="" />
 
     <TextView
         android:id="@+id/Groeße"
@@ -36,7 +36,7 @@
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="" />
 
     <TextView
         android:id="@+id/AnzahlStühle"
@@ -52,7 +52,7 @@
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="" />
 
     <TextView
         android:id="@+id/AnzahlTische"
@@ -68,7 +68,7 @@
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="" />
 
     <TextView
         android:id="@+id/AnzahlPlaetze"
@@ -84,7 +84,7 @@
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="" />
 
     <TextView
         android:id="@+id/Sonderausstattung"
@@ -100,7 +100,7 @@
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="" />
 
     <TextView
         android:id="@+id/Maengel"
@@ -116,7 +116,7 @@
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="" />
 
 
     <LinearLayout
@@ -130,19 +130,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Speichern" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
-
-        <Button
-            android:id="@+id/Löschen"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Löschen" />
 
         <View
             android:layout_width="0dp"
