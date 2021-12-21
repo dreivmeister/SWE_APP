@@ -98,16 +98,6 @@ public class MainActivity<adapter> extends AppCompatActivity {
                 startActivity(mainZuNeu);
             }
         });
-
-        Button filter = findViewById(R.id.Filter);
-        filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("Filter Button clicked");
-                Intent mainZuFilter = new Intent(MainActivity.this, FilterActivity.class);
-                startActivity(mainZuFilter);
-            }
-        });
     }
 
     @Override

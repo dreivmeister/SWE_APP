@@ -46,7 +46,7 @@ public class EditActivity extends AppCompatActivity {
         EditText text7 = (EditText) findViewById(R.id.Maengel_E);
         text7.setText(String.valueOf(currentRoom.getMaengel()));
 
-        Button Speichern = findViewById(R.id.Speichern_E);
+        Button Speichern = findViewById(R.id.Speichern);
         Speichern.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +70,7 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
-        Button Verlassen = findViewById(R.id.Verlassen_E);
+        Button Verlassen = findViewById(R.id.Verlassen_N);
         Verlassen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

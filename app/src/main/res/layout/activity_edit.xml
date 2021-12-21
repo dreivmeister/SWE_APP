@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-  <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -37,7 +39,6 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="text"
-            android:text="If seen: ERROR"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ID"
@@ -68,7 +69,6 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="text"
-            android:text="If seen: ERROR"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Groeße"
@@ -99,7 +99,6 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="text"
-            android:text="If seen: ERROR"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/AnzahlStühle"
@@ -130,7 +129,6 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="text"
-            android:text="If seen: ERROR"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/AnzahlTische"
@@ -161,7 +159,6 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="text"
-            android:text="If seen: ERROR"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/AnzahlPlaetze"
@@ -192,7 +189,6 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="text"
-            android:text="If seen: ERROR"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Sonderaussattung"
@@ -223,7 +219,6 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="text"
-            android:text="If seen: ERROR"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Maengel"
@@ -251,8 +246,8 @@
 
         <View
             android:id="@+id/LöschenSpacer"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="129dp"
+            android:layout_height="61dp"
             android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/Verlassen_N"
@@ -270,7 +265,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/LöschenSpacer"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
