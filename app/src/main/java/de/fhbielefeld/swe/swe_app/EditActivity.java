@@ -29,16 +29,33 @@ public class EditActivity extends AppCompatActivity {
         text1.setText(currentRoom.toString());
 
         EditText text2 = (EditText) findViewById(R.id.Groeße_E);
-        text2.setText(String.valueOf(currentRoom.getRaumGroesse()));
+        if(currentRoom.getRaumGroesse() == -1) {
+            text2.setText("");
+        } else {
+            text2.setText(String.valueOf(currentRoom.getRaumGroesse()));
+        }
 
         EditText text3 = (EditText) findViewById(R.id.AnzahlStühle_E);
-        text3.setText(String.valueOf(currentRoom.getAnzahlStuehle()));
+        if(currentRoom.getAnzahlStuehle() == -1) {
+            text3.setText("");
+        }else {
+            text3.setText(String.valueOf(currentRoom.getAnzahlStuehle()));
+        }
+
 
         EditText text4 = (EditText) findViewById(R.id.AnzahlTische_E);
-        text4.setText(String.valueOf(currentRoom.getAnzahlTische()));
+        if(currentRoom.getAnzahlTische() == -1) {
+            text4.setText("");
+        }else {
+            text4.setText(String.valueOf(currentRoom.getAnzahlTische()));
+        }
 
         EditText text5 = (EditText) findViewById(R.id.AnzahlPlaetze_E);
-        text5.setText(String.valueOf(currentRoom.getAnzahlPlaetze()));
+        if(currentRoom.getAnzahlPlaetze() == -1) {
+            text5.setText("");
+        }else {
+            text5.setText(String.valueOf(currentRoom.getAnzahlPlaetze()));
+        }
 
         EditText text6 = (EditText) findViewById(R.id.Sonderaussattung_E);
         text6.setText(currentRoom.getSonderAusstattung());
@@ -55,12 +72,33 @@ public class EditActivity extends AppCompatActivity {
 
                 //Raum Objekt erstellen aus gegebenen Werten
                 Bundle b = new Bundle();
-                b.putChar("gebT", text1.getText().charAt(0));
-                b.putInt("raumN", Integer.parseInt(String.valueOf(text1.getText().subSequence(1,4))));
-                b.putInt("raumG",Integer.parseInt(String.valueOf(text2.getText())));
-                b.putInt("anzS" ,Integer.parseInt(String.valueOf(text3.getText())));
-                b.putInt("anzT",Integer.parseInt(String.valueOf(text4.getText())));
-                b.putInt("anzP", Integer.parseInt(String.valueOf(text5.getText())));
+                if(text1.getText().length() == 0) {
+                    b.putChar("gebT", 'Z');
+                    b.putInt("raumN", 0);
+                }else {
+                    b.putChar("gebT", text1.getText().charAt(0));
+                    b.putInt("raumN", Integer.parseInt(String.valueOf(text1.getText().subSequence(1, text1.getText().length()))));
+                }
+                if(text2.getText().length() == 0) {
+                    b.putInt("raumG", -1);
+                }else {
+                    b.putInt("raumG",Integer.parseInt(String.valueOf(text2.getText())));
+                }
+                if(text3.getText().length() == 0) {
+                    b.putInt("anzS", -1);
+                }else {
+                    b.putInt("anzS" ,Integer.parseInt(String.valueOf(text3.getText())));
+                }
+                if(text4.getText().length() == 0) {
+                    b.putInt("anzT", -1);
+                }else {
+                    b.putInt("anzT",Integer.parseInt(String.valueOf(text4.getText())));
+                }
+                if(text5.getText().length() == 0) {
+                    b.putInt("anzP", -1);
+                }else {
+                    b.putInt("anzP", Integer.parseInt(String.valueOf(text5.getText())));
+                }
                 b.putString("sonderA", String.valueOf(text6.getText()));
                 b.putString("maengel", String.valueOf(text7.getText()));
 
