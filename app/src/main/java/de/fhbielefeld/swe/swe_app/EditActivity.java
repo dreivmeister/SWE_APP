@@ -85,8 +85,13 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("Löschen-Button clicked");
-                // Hier noch das aktive Löschen des Raumes einfügen!
+
+                Bundle b = new Bundle();
+                b.putChar("gebT", text1.getText().charAt(0));
+                b.putInt("raumN", Integer.parseInt(String.valueOf(text1.getText().subSequence(1,4))));
+
                 Intent editZuMain = new Intent(EditActivity.this, MainActivity.class);
+                editZuMain.putExtra("deletedRoom", b);
                 startActivity(editZuMain);
             }
         });

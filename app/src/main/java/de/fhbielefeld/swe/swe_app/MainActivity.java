@@ -122,6 +122,23 @@ public class MainActivity<adapter> extends AppCompatActivity {
             return;
         }
 
+        Intent i_del = getIntent();
+        Bundle b_del = i_del.getBundleExtra("deletedRoom");
+        if (b_del != null) {
+            utils.deleteRoom(AppDatabase.getAppDatabase(MainActivity.this), utils.getRoom(AppDatabase.getAppDatabase(MainActivity.this),
+                                                                                            b_del.getChar("gebT"),
+                                                                                            b_del.getInt("raumN")));
+
+            raumListe = utils.getAllRooms(AppDatabase.getAppDatabase(MainActivity.this));
+
+            ArrayAdapter<Raum> adapter = new ArrayAdapter<Raum>(MainActivity.this,android.R.layout.simple_list_item_1, raumListe);
+            ListView listView = findViewById(R.id.Ergebnisse);
+            listView.setAdapter(adapter);
+
+            adapter.notifyDataSetChanged();
+            return;
+        }
+
         Intent i_new = getIntent();
         Bundle b_new = i_new.getBundleExtra("newRoom");
         Raum newRoom = new Raum();
