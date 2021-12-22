@@ -80,5 +80,16 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
+        Button Loeschen = findViewById(R.id.Löschen);
+        Loeschen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Löschen-Button clicked");
+                // Hier noch das aktive Löschen des Raumes einfügen!
+                Intent editZuMain = new Intent(EditActivity.this, MainActivity.class);
+                startActivity(editZuMain);
+            }
+        });
+
     }
 }
