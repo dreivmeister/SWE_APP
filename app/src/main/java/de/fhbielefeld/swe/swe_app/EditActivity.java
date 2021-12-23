@@ -25,7 +25,7 @@ public class EditActivity extends AppCompatActivity {
         Raum currentRoom = utils.getRoom(AppDatabase.getAppDatabase(this), raumID);
 
         EditText text1 = (EditText) findViewById(R.id.ID_E);
-        text1.setText(currentRoom.getRaumID());
+        text1.setText(String.valueOf(currentRoom.getRaumID()));
 
         EditText text2 = (EditText) findViewById(R.id.Groeße_E);
         if(currentRoom.getRaumGroesse() == -1) {
@@ -40,7 +40,6 @@ public class EditActivity extends AppCompatActivity {
         }else {
             text3.setText(String.valueOf(currentRoom.getAnzahlStuehle()));
         }
-
 
         EditText text4 = (EditText) findViewById(R.id.AnzahlTische_E);
         if(currentRoom.getAnzahlTische() == -1) {
@@ -57,7 +56,7 @@ public class EditActivity extends AppCompatActivity {
         }
 
         EditText text6 = (EditText) findViewById(R.id.Sonderaussattung_E);
-        text6.setText(currentRoom.getSonderAusstattung());
+        text6.setText(String.valueOf(currentRoom.getSonderAusstattung()));
 
         EditText text7 = (EditText) findViewById(R.id.Maengel_E);
         text7.setText(String.valueOf(currentRoom.getMaengel()));
