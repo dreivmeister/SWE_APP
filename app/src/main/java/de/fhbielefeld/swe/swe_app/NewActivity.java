@@ -31,34 +31,7 @@ public class NewActivity extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println("Speichern Button clicked");
 
-                Bundle b = new Bundle();
-                if(text1.getText().length() == 0) {
-                    b.putString("raumID", "z0");
-                }else {
-                    b.putString("raumID", String.valueOf(text1.getText()));
-                }
-                if(text2.getText().length() == 0) {
-                    b.putInt("raumG", -1);
-                }else {
-                    b.putInt("raumG",Integer.parseInt(String.valueOf(text2.getText())));
-                }
-                if(text3.getText().length() == 0) {
-                    b.putInt("anzS", -1);
-                }else {
-                    b.putInt("anzS" ,Integer.parseInt(String.valueOf(text3.getText())));
-                }
-                if(text4.getText().length() == 0) {
-                    b.putInt("anzT", -1);
-                }else {
-                    b.putInt("anzT",Integer.parseInt(String.valueOf(text4.getText())));
-                }
-                if(text5.getText().length() == 0) {
-                    b.putInt("anzP", -1);
-                }else {
-                    b.putInt("anzP", Integer.parseInt(String.valueOf(text5.getText())));
-                }
-                b.putString("sonderA", String.valueOf(text6.getText()));
-                b.putString("maengel", String.valueOf(text7.getText()));
+                Bundle b = utils.getData(text1, text2, text3, text4, text5, text6, text7);
 
                 Intent neuZuMain = new Intent(NewActivity.this, MainActivity.class);
                 neuZuMain.putExtra("newRoom", b);
