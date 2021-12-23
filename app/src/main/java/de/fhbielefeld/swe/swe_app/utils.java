@@ -14,8 +14,8 @@ public class utils {
         return db.raumDao().getAll();
     }
 
-    public static Raum getRoom(final AppDatabase db, char gebT, int raumN) {
-        return db.raumDao().loadById(raumN, gebT);
+    public static Raum getRoom(final AppDatabase db, String raumID) {
+        return db.raumDao().loadById(raumID);
     }
 
     public static void updateRoom(final AppDatabase db, Raum raum) {

@@ -20,13 +20,12 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
 
         Intent intent = getIntent();
-        char gebT = intent.getCharExtra("Gebaeudeteil", 'z');
-        int raumN = intent.getIntExtra("Raumnummer", 0);
+        String raumID = intent.getStringExtra("raumID");
 
-        Raum currentRoom = utils.getRoom(AppDatabase.getAppDatabase(this), gebT, raumN);
+        Raum currentRoom = utils.getRoom(AppDatabase.getAppDatabase(this), raumID);
 
         EditText text1 = (EditText) findViewById(R.id.ID_E);
-        text1.setText(currentRoom.toString());
+        text1.setText(currentRoom.getRaumID());
 
         EditText text2 = (EditText) findViewById(R.id.Groeße_E);
         if(currentRoom.getRaumGroesse() == -1) {
@@ -73,32 +72,35 @@ public class EditActivity extends AppCompatActivity {
                 //Raum Objekt erstellen aus gegebenen Werten
                 Bundle b = new Bundle();
                 if(text1.getText().length() == 0) {
-                    b.putChar("gebT", 'Z');
-                    b.putInt("raumN", 0);
+                    b.putString("raumID", "Z0");
                 }else {
-                    b.putChar("gebT", text1.getText().charAt(0));
-                    b.putInt("raumN", Integer.parseInt(String.valueOf(text1.getText().subSequence(1, text1.getText().length()))));
+                    b.putString("raumID", String.valueOf(text1.getText()));
                 }
+
                 if(text2.getText().length() == 0) {
                     b.putInt("raumG", -1);
                 }else {
                     b.putInt("raumG",Integer.parseInt(String.valueOf(text2.getText())));
                 }
+
                 if(text3.getText().length() == 0) {
                     b.putInt("anzS", -1);
                 }else {
                     b.putInt("anzS" ,Integer.parseInt(String.valueOf(text3.getText())));
                 }
+
                 if(text4.getText().length() == 0) {
                     b.putInt("anzT", -1);
                 }else {
                     b.putInt("anzT",Integer.parseInt(String.valueOf(text4.getText())));
                 }
+
                 if(text5.getText().length() == 0) {
                     b.putInt("anzP", -1);
                 }else {
                     b.putInt("anzP", Integer.parseInt(String.valueOf(text5.getText())));
                 }
+
                 b.putString("sonderA", String.valueOf(text6.getText()));
                 b.putString("maengel", String.valueOf(text7.getText()));
 
@@ -125,8 +127,7 @@ public class EditActivity extends AppCompatActivity {
                 System.out.println("Löschen-Button clicked");
 
                 Bundle b = new Bundle();
-                b.putChar("gebT", text1.getText().charAt(0));
-                b.putInt("raumN", Integer.parseInt(String.valueOf(text1.getText().subSequence(1,4))));
+                b.putString("raumID", String.valueOf(text1.getText()));
 
                 Intent editZuMain = new Intent(EditActivity.this, MainActivity.class);
                 editZuMain.putExtra("deletedRoom", b);

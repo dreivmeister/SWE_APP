@@ -43,20 +43,21 @@ public class CustomAdapter extends BaseAdapter implements Filterable {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();
-                ArrayList<RaumID> FilteredRaumNummern = new ArrayList<>();
+                ArrayList<String> FilteredRaumNummern = new ArrayList<>();
 
                 //tatsächliches filtern
                 constraint = constraint.toString().toLowerCase();
                 for(int i = 0; i < MainActivity.getRaumListe().size(); i++) {
-                    char GebaeudeTeil = MainActivity.getRaumListe().get(i).gebaeudeteil;
-                    int RaumNummer = MainActivity.getRaumListe().get(i).raumnummer;
+                    System.out.println("In der Liste");
+                    String RaumID = MainActivity.getRaumListe().get(i).raumID;
 
                     //comparison between EditText and ListView content
                     //compare RaumNummer with integer sequence of constraint
                     //compare GebaeudeTeil with char at beginning of constraint
                     //https://docs.oracle.com/javase/8/docs/api/java/lang/CharSequence.html
-                    if (GebaeudeTeil == constraint.charAt(0) && constraint.toString().contains(String.valueOf(RaumNummer))) {
-                        FilteredRaumNummern.add(new RaumID(GebaeudeTeil, RaumNummer));
+                    if (RaumID.charAt(0) == constraint.charAt(0) && constraint.toString().contains(RaumID.substring(1))) {
+                        System.out.println("In der Bedingung");
+                        FilteredRaumNummern.add(RaumID);
                     }
                 }
                 return results;
@@ -64,7 +65,7 @@ public class CustomAdapter extends BaseAdapter implements Filterable {
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                List<RaumID> arrayListNames = (List<RaumID>) results.values;
+                List<String> arrayListNames = (List<String>) results.values;
                 notifyDataSetChanged();
             }
         };

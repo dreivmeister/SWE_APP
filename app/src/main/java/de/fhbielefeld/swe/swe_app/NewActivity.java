@@ -33,11 +33,9 @@ public class NewActivity extends AppCompatActivity {
 
                 Bundle b = new Bundle();
                 if(text1.getText().length() == 0) {
-                    b.putChar("gebT", 'Z');
-                    b.putInt("raumN", 0);
+                    b.putString("raumID", "z0");
                 }else {
-                    b.putChar("gebT", text1.getText().charAt(0));
-                    b.putInt("raumN", Integer.parseInt(String.valueOf(text1.getText().subSequence(1, text1.getText().length()))));
+                    b.putString("raumID", String.valueOf(text1.getText()));
                 }
                 if(text2.getText().length() == 0) {
                     b.putInt("raumG", -1);
