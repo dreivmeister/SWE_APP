@@ -6,10 +6,11 @@ import androidx.room.PrimaryKey;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(primaryKeys = {"gebaeudeteil", "raumnummer"})
+@Entity
 public class Raum {
-    public char gebaeudeteil;
-    public int raumnummer;
+    @PrimaryKey
+    @NonNull
+    public String raumID;
 
     @ColumnInfo(name = "Raumgroeße")
     public int raumGroesse;
@@ -33,9 +34,8 @@ public class Raum {
 
     }
 
-    public Raum (char gebaeudeteil, int raumnummer, int raumGroesse, int anzahlStuehle, int anzahlTische, int anzahlPlaetze, String sonderAusstattung, String maengel) {
-        this.gebaeudeteil = gebaeudeteil;
-        this.raumnummer = raumnummer;
+    public Raum (String raumID, int raumGroesse, int anzahlStuehle, int anzahlTische, int anzahlPlaetze, String sonderAusstattung, String maengel) {
+        this.raumID = raumID;
         this.raumGroesse = raumGroesse;
         this.anzahlStuehle = anzahlStuehle;
         this.anzahlTische = anzahlTische;
@@ -47,16 +47,9 @@ public class Raum {
 
     @Override
     public String toString() {
-        return gebaeudeteil + String.valueOf(raumnummer);
+        return raumID;
     }
-
-    public char getGebaeudeteil() {
-        return gebaeudeteil;
-    }
-
-    public int getRaumnummer() {
-        return raumnummer;
-    }
+    public String getRaumID() { return raumID; }
 
     public int getRaumGroesse() {
         return raumGroesse;
@@ -82,13 +75,7 @@ public class Raum {
         return sonderAusstattung;
     }
 
-    public void setGebaeudeteil(char gebaeudeteil) {
-        this.gebaeudeteil = gebaeudeteil;
-    }
-
-    public void setRaumnummer(int raumnummer) {
-        this.raumnummer = raumnummer;
-    }
+    public void setRaumID(String raumID) { this.raumID = raumID; }
 
     public void setRaumGroesse(int raumGroesse) {
         this.raumGroesse = raumGroesse;
@@ -113,6 +100,6 @@ public class Raum {
     }
 
     public void print() {
-        System.out.println(this.gebaeudeteil + " " + this.raumnummer);
+        System.out.println(this.raumID);
     }
 }

@@ -43,16 +43,11 @@ public class MainActivity<adapter> extends AppCompatActivity {
                 System.out.println("Item clicked");
                 Intent itemZuEdit = new Intent(MainActivity.this, EditActivity.class);
                 Raum item = (Raum) parent.getAdapter().getItem(position);
-                itemZuEdit.putExtra("Raumnummer", item.getRaumnummer());
-                itemZuEdit.putExtra("Gebaeudeteil", item.getGebaeudeteil());
+                itemZuEdit.putExtra("raumID", item.getRaumID());
 
 
                 //print db contents
                 List<Raum> rL = utils.getAllRooms(AppDatabase.getAppDatabase(MainActivity.this));
-                System.out.println("MA vor Wechsel: ");
-                for (Raum r : rL) {
-                    r.print();
-                }
 
                 startActivity(itemZuEdit);
             }
@@ -82,6 +77,7 @@ public class MainActivity<adapter> extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                System.out.println("Im Filter");
                 adapter.getFilter().filter(s);
             }
 
@@ -108,7 +104,7 @@ public class MainActivity<adapter> extends AppCompatActivity {
         Bundle b = i.getBundleExtra("editedRoom");
         Raum updatedRoom = new Raum();
         if (b != null) {
-            updatedRoom = new Raum(b.getChar("gebT"), b.getInt("raumN"), b.getInt("raumG"),
+            updatedRoom = new Raum(b.getString("raumID"), b.getInt("raumG"),
                     b.getInt("anzS"), b.getInt("anzT"), b.getInt("anzP"), b.getString("sonderA"), b.getString("maengel"));
             utils.updateRoom(AppDatabase.getAppDatabase(this), updatedRoom);
 
@@ -126,8 +122,7 @@ public class MainActivity<adapter> extends AppCompatActivity {
         Bundle b_del = i_del.getBundleExtra("deletedRoom");
         if (b_del != null) {
             utils.deleteRoom(AppDatabase.getAppDatabase(MainActivity.this), utils.getRoom(AppDatabase.getAppDatabase(MainActivity.this),
-                                                                                            b_del.getChar("gebT"),
-                                                                                            b_del.getInt("raumN")));
+                                                                                            b_del.getString("raumID")));
 
             raumListe = utils.getAllRooms(AppDatabase.getAppDatabase(MainActivity.this));
 
@@ -143,7 +138,7 @@ public class MainActivity<adapter> extends AppCompatActivity {
         Bundle b_new = i_new.getBundleExtra("newRoom");
         Raum newRoom = new Raum();
         if(b_new != null) {
-            newRoom = new Raum(b_new.getChar("gebT"), b_new.getInt("raumN"), b_new.getInt("raumG"),
+            newRoom = new Raum(b_new.getString("raumID"), b_new.getInt("raumG"),
                     b_new.getInt("anzS"), b_new.getInt("anzT"), b_new.getInt("anzP"), b_new.getString("sonderA"), b_new.getString("maengel"));
             utils.addRoom(AppDatabase.getAppDatabase(this), newRoom);
 
